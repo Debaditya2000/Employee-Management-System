@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title || 'EMS' %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .table-container {
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">ECL</a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a href="/" class="nav-item nav-link">Home</a>
+                    <a href="/emp/add" class="nav-item nav-link">Add</a>
+                    <a href="/emp/show" class="nav-item nav-link active">Show All</a>
+                    <a href="/emp/search" class="nav-item nav-link">Search</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container table-container">
+        <h2>Employee List</h2>
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>EMP ID</th>
+                    <th>NAME</th>
+                    <th>DESIGNATION</th>
+                    <th>BASIC</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (data && data.length > 0) { %>
+                    <% data.forEach((e, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= e.eid %></td>
+                            <td><%= e.ename %></td>
+                            <td><%= e.desig %></td>
+                            <td><%= e.basic.toLocaleString() %></td>
+                            <td>
+                                <a href="/emp/edit/<%= e._id %>" class="btn btn-sm btn-primary me-2">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="/emp/del?id=<%= e._id %>" 
+                                   class="btn btn-sm btn-danger" 
+                                   onclick="return confirm('Are you sure you want to delete this employee?')">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="6" class="text-center">No employees found</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

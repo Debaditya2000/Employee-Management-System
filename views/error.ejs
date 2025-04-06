@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .error-container {
+            margin: 50px auto;
+            max-width: 600px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container error-container">
+        <h1><%= title %></h1>
+        <p class="lead"><%= message %></p>
+        <% if (Object.keys(error).length > 0) { %>
+            <pre class="text-danger"><%= error.stack %></pre>
+        <% } %>
+        <a href="/" class="btn btn-primary mt-3">Return to Home</a>
+    </div>
+</body>
+</html>
